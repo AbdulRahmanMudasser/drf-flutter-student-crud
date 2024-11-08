@@ -24,7 +24,7 @@ def student_details(request, pk):
         student = StudentModel.objects.get(pk=pk)
 
     except StudentModel.DoesNotExist:
-        return Response('{"error": "Student Not Exits"}', status=status.HTTP_404_NOT_FOUND)
+        return Response({"error": "Student Not Exits"}, status=status.HTTP_404_NOT_FOUND)
     
     serializer = StudentSerializer(student)
 
@@ -45,16 +45,16 @@ def update_student(request, pk):
     try: 
         student = StudentModel.objects.get(pk=pk)
     except StudentModel.DoesNotExist:
-        return Response('{"error": "Student Not Exits"}', status=status.HTTP_404_NOT_FOUND)
+        return Response({"error": "Student Not Exits"}, status=status.HTTP_404_NOT_FOUND)
     
-    serializer = StudentSerializer(data=request.data)
+    serializer = StudentSerializer(student, data=request.data)
 
     if serializer.is_valid():
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-    return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Deleting Student
 @api_view(['DELETE'])
@@ -62,8 +62,8 @@ def delete_student(request, pk):
     try:
         student = StudentModel.objects.get(pk=pk)
     except StudentModel.DoesNotExist:
-        return Response('{"error": "Student Not Exists"}', status=status.HTTP_404_NOT_FOUND)
+        return Response({"error": "Student Not Exists"}, status=status.HTTP_404_NOT_FOUND)
     
     student.delete()
 
-    return Response('{"message": "Student Deleted"}', status=status.HTTP_204_NO_CONTENT)
+    return Response({"message": "Student Deleted"}, status=status.HTTP_200_OK)

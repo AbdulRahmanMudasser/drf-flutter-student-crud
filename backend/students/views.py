@@ -38,3 +38,20 @@ def list_students(request):
     serializer = StudentSerializer(students, many=True)
 
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+# Update Existing's Student Data
+@api_view(['PUT'])
+def update_student(request, pk):
+    try: 
+        student = StudentModel.objects.get(pk=pk)
+    except StudentModel.DoesNotExist:
+        return Response('{"error": "Does Not Exits}', status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = StudentSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)

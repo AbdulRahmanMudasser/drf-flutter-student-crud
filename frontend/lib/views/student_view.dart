@@ -72,8 +72,13 @@ class StudentView extends StatelessWidget {
                                     const DataCell(
                                       Center(child: Icon(Icons.edit, size: 18)),
                                     ),
-                                    const DataCell(
-                                      Center(child: Icon(Icons.delete, size: 18)),
+                                    DataCell(
+                                      Center(
+                                        child: GestureDetector(
+                                          onTap: () => controller.deleteStudent(student.id!),
+                                          child: const Icon(Icons.delete, size: 18),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ))

@@ -13,6 +13,7 @@ class StudentController extends GetxController {
     super.onInit();
   }
 
+  // Fetch Student
   void fetchStudent() async {
     try {
       isLoading(true);
@@ -22,6 +23,15 @@ class StudentController extends GetxController {
       students.assignAll(studentsList);
     } finally {
       isLoading(false);
+    }
+  }
+
+  // Delete Student
+  void deleteStudent(int id) async {
+    final success = await StudentService.deleteStudent(id);
+
+    if (success) {
+      students.removeWhere((student) => student.id == id);
     }
   }
 }

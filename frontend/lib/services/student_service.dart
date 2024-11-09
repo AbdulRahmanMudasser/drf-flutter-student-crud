@@ -1,14 +1,15 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:frontend/models/student_model.dart';
 
 class StudentService {
-  static const String baseURL = "http://192.168.182.179:8000/";
+  static const String baseURL = "http://192.168.182.179:8000";
 
   // Fetch All Students
   static Future<List<StudentModel>> getStudents() async {
-    final response = await http.get(Uri.parse("${baseURL}students/"));
+    final response = await http.get(Uri.parse("$baseURL/students/"));
 
     if (response.statusCode == 200) {
       List jsonResponses = json.decode(response.body);
@@ -17,5 +18,12 @@ class StudentService {
     } else {
       throw Exception("Failed to Load Students");
     }
+  }
+
+  // Delete Student
+  static Future<bool> deleteStudent(int id) async {
+    final response = await http.delete(Uri.parse("$baseURL/student/delete/$id/"));
+
+    return response.statusCode == 200;
   }
 }

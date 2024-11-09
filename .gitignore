@@ -34,7 +34,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/
 lib64/
 parts/
 sdist/
@@ -242,7 +242,7 @@ lib/generated_plugin_registrant.dart
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
 [Bb]in
 [Ii]nclude
-[Ll]ib
+# [Ll]ib
 [Ll]ib64
 [Ll]ocal
 [Ss]cripts

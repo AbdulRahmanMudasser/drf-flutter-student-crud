@@ -38,6 +38,25 @@ class StudentService {
     }
   }
 
+  // Update Student
+  static Future<StudentModel?> updateStudent(int id, String name, int roll, String city) async {
+    final response = await http.put(
+      Uri.parse("$baseURL/student/update/$id/"),
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({
+        "name": name,
+        "roll": roll,
+        "city": city,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return StudentModel.fromJson(json.decode(response.body));
+    } else {
+      return null;
+    }
+  }
+
   // Delete Student
   static Future<bool> deleteStudent(int id) async {
     final response = await http.delete(Uri.parse("$baseURL/student/delete/$id/"));

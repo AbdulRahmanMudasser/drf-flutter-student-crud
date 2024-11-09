@@ -35,6 +35,17 @@ class StudentController extends GetxController {
     }
   }
 
+  // Update Student
+  void updateStudent(int id, String name, int roll, String city) async {
+    var updatedStudent = await StudentService.updateStudent(id, name, roll, city);
+
+    if (updatedStudent != null) {
+      int index = students.indexWhere((student) => student.id == id);
+
+      students[index] = updatedStudent;
+    }
+  }
+
   // Delete Student
   void deleteStudent(int id) async {
     bool success = await StudentService.deleteStudent(id);

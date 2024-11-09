@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/controllers/student_controller.dart';
+import 'package:frontend/views/methods/update_student_dialog.dart';
 import 'package:get/get.dart';
 
 import 'methods/create_student_dialog.dart';
@@ -71,8 +72,13 @@ class StudentView extends StatelessWidget {
                                     DataCell(Text(student.name)),
                                     DataCell(Text(student.roll.toString())),
                                     DataCell(Text(student.city)),
-                                    const DataCell(
-                                      Center(child: Icon(Icons.edit, size: 18)),
+                                    DataCell(
+                                      Center(
+                                        child: GestureDetector(
+                                          onTap: () => updateStudentDialog(context, controller, student),
+                                          child: const Icon(Icons.edit, size: 18),
+                                        ),
+                                      ),
                                     ),
                                     DataCell(
                                       Center(

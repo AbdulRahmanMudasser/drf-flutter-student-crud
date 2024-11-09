@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:frontend/models/student_model.dart';
@@ -17,6 +16,25 @@ class StudentService {
       return jsonResponses.map((student) => StudentModel.fromJson(student)).toList();
     } else {
       throw Exception("Failed to Load Students");
+    }
+  }
+
+  // Create Student
+  static Future<StudentModel?> createStudent(String name, int roll, String city) async {
+    final response = await http.post(
+      Uri.parse("$baseURL/student/create/"),
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({
+        "name": name,
+        "roll": roll,
+        "city": city,
+      }),
+    );
+
+    if (response.statusCode == 201) {
+      return StudentModel.fromJson(json.decode(response.body));
+    } else {
+      return null;
     }
   }
 

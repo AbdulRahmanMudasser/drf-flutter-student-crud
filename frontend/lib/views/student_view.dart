@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/controllers/student_controller.dart';
 import 'package:get/get.dart';
 
+import 'methods/create_student_dialog.dart';
+
 class StudentView extends StatelessWidget {
   StudentView({super.key});
 
@@ -46,7 +48,7 @@ class StudentView extends StatelessWidget {
                         ),
                         dividerThickness: 0,
                         border: TableBorder.all(
-                          color: Colors.black12,
+                          color: Colors.grey.shade200,
                           borderRadius: BorderRadius.circular(5),
                         ),
                         headingRowHeight: 45,
@@ -91,6 +93,13 @@ class StudentView extends StatelessWidget {
             );
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => createStudentDialog(context, controller),
+        foregroundColor: Colors.white,
+        elevation: 0,
+        shape: const CircleBorder(),
+        child: const Icon(Icons.add),
       ),
     );
   }

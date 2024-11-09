@@ -26,9 +26,18 @@ class StudentController extends GetxController {
     }
   }
 
+  // Create Student
+  void createStudent(String name, int roll, String city) async {
+    var newStudent = await StudentService.createStudent(name, roll, city);
+
+    if (newStudent != null) {
+      students.add(newStudent);
+    }
+  }
+
   // Delete Student
   void deleteStudent(int id) async {
-    final success = await StudentService.deleteStudent(id);
+    bool success = await StudentService.deleteStudent(id);
 
     if (success) {
       students.removeWhere((student) => student.id == id);

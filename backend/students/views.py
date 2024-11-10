@@ -47,7 +47,11 @@ def update_student(request, pk):
     except StudentModel.DoesNotExist:
         return Response({"error": "Student Not Exits"}, status=status.HTTP_404_NOT_FOUND)
     
-    serializer = StudentSerializer(student, data=request.data)
+    # Full Update
+    # serializer = StudentSerializer(student, data=request.data)
+
+    # Partial Update
+    serializer = StudentSerializer(student, data=request.data, partial=True)
 
     if serializer.is_valid():
         serializer.save()

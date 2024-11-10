@@ -16,13 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
 from students import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('student/create/', views.create_student, name='create_student'),
-    path('students/', views.list_students, name='list_students'),
-    path('student/<int:pk>/', views.student_details, name='student_details'),
-    path('student/update/<int:pk>/', views.update_student, name='update_student'),
-    path('student/delete/<int:pk>/', views.delete_student, name='delete_student'),
+
+    # Function Based View's URLs
+    # path('student/create/', views.create_student, name='create-student'),
+    # path('students/', views.list_students, name='list-students'),
+    # path('student/<int:pk>/', views.student_details, name='student-details'),
+    # path('student/update/<int:pk>/', views.update_student, name='update-student'),
+    # path('student/delete/<int:pk>/', views.delete_student, name='delete-student'),
+
+    # Class Based View's URLs
+    path('student/create/', views.CreateStudent.as_view(), name='create-student'),
+    path('students/', views.ListStudents.as_view(), name='list-students'),
+    path('student/<int:pk>/', views.StudentDetail.as_view(), name='student-detail'),
+    path('student/update/<int:pk>/', views.UpdateStudent.as_view(), name='update-student'),
+    path('student/delete/<int:pk>/', views.DeleteStudent.as_view(), name='delete-student'),
 ]
